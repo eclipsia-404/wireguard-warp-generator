@@ -25,7 +25,3 @@ Command-line tool for generating WARP configs. See [scripts/README.md](scripts/R
 1. Generates a WireGuard keypair locally
 2. Registers the public key with Cloudflare's WARP API
 3. Outputs a complete WireGuard configuration
-
-## License
-
-MIT

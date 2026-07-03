@@ -105,6 +105,7 @@ button { font-family: inherit; cursor: pointer; background: none; border: none; 
 .nav-action svg { width: 13px; height: 13px; }
 @media (max-width: 560px) { .nav-action .full { display: none; } }
 
+
 /* ===== HERO ===== */
 .hero { padding: 2.75rem 0 0.5rem; }
 @keyframes fadeUp { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: translateY(0); } }
@@ -120,9 +121,9 @@ button { font-family: inherit; cursor: pointer; background: none; border: none; 
 .eyebrow::before { content: ""; width: 7px; height: 7px; border-radius: 50%; background: var(--accent-ok); box-shadow: 0 0 12px rgba(138,160,122,0.3); animation: pulse 2s ease-in-out infinite; }
 
 h1.hero-title {
-  font-family: var(--font-display); font-size: clamp(1.9rem, 7vw, 2.9rem); font-weight: 600;
+  font-family: var(--font-display); font-size: clamp(1.9rem, 5vw, 3.4rem); font-weight: 600;
   line-height: 1.15; color: var(--ink-primary); letter-spacing: -0.01em; margin-bottom: 1.1rem;
-  animation: fadeUp 600ms var(--ease) 80ms both;
+  animation: fadeUp 600ms var(--ease) 80ms both; max-width: 22ch;
 }
 .hero-description { font-size: 1rem; color: var(--ink-muted); max-width: 56ch; margin-bottom: 0; line-height: 1.7; animation: fadeUp 600ms var(--ease) 150ms both; }
 .hero-description strong { color: var(--ink-secondary); font-weight: 500; }
@@ -145,6 +146,24 @@ h1.hero-title {
 .disclaimer-strip strong { color: var(--accent-warn); font-weight: 600; }
 .disclaimer-strip svg { width: 15px; height: 15px; flex-shrink: 0; color: var(--accent-warn); margin-top: 3px; }
 .disclaimer-strip .disclaimer-text { flex: 1; min-width: 0; }
+
+/* ===== proxy quota bar ===== */
+.quota-block {
+  margin-top: 1.1rem; padding: 0.95rem 1.1rem; border: 1px solid var(--line);
+  background: var(--bg-1); border-radius: var(--radius-s);
+  animation: fadeUp 600ms var(--ease) 300ms both;
+}
+.quota-head { display: flex; align-items: baseline; justify-content: space-between; gap: 0.75rem; margin-bottom: 0.6rem; flex-wrap: wrap; }
+.quota-title { font-family: var(--font-mono); font-size: 0.72rem; color: var(--ink-muted); text-transform: uppercase; letter-spacing: 0.06em; }
+.quota-count { font-family: var(--font-mono); font-size: 0.78rem; color: var(--ink-secondary); }
+.quota-count strong { color: var(--ink-primary); }
+.quota-track { width: 100%; height: 8px; border-radius: 999px; background: var(--bg-2); border: 1px solid var(--line); overflow: hidden; }
+.quota-fill { height: 100%; width: 0%; background: linear-gradient(90deg, var(--accent-ok), var(--accent-warn)); border-radius: 999px; transition: width 400ms var(--ease), background 400ms var(--ease); }
+.quota-fill.warn { background: linear-gradient(90deg, var(--accent-warn), var(--accent-bad)); }
+.quota-fill.bad { background: var(--accent-bad); }
+.quota-foot { display: flex; justify-content: space-between; gap: 0.75rem; margin-top: 0.55rem; flex-wrap: wrap; }
+.quota-note { font-size: 0.74rem; color: var(--ink-subtle); line-height: 1.55; }
+.quota-reset { font-family: var(--font-mono); font-size: 0.68rem; color: var(--ink-subtle); white-space: nowrap; }
 
 /* ===== "How it works" steps ===== */
 .how-section { padding: 0.5rem 0 2.5rem; }
@@ -364,6 +383,14 @@ select.form-input option { background: var(--bg-1); color: var(--ink-primary); }
 .footer-links-row { display: flex; flex-wrap: wrap; gap: 0.5rem 1.1rem; }
 .footer-legal-note { font-size: 0.7rem; color: var(--ink-subtle); line-height: 1.6; max-width: 62ch; margin-top: 0.9rem; }
 
+/* ===== DESKTOP WIDTH ===== */
+@media (min-width: 900px) {
+  .wrap { max-width: 840px; }
+  .install-body { padding: 2.1rem 2.25rem 2.3rem; }
+  .field-stack { display: grid; grid-template-columns: 1fr 1fr; gap: 1.1rem 1.5rem; }
+  .field-stack .form-field.span-2 { grid-column: 1 / -1; }
+}
+
 @media (max-width: 420px) {
   h1.hero-title { font-size: 1.7rem; }
   .install-body { padding: 1.25rem 1rem; }
@@ -376,6 +403,7 @@ select.form-input option { background: var(--bg-1); color: var(--ink-primary); }
   .action-buttons .btn { min-height: 52px; }
   .legal-section summary { padding: 0.95rem 1.1rem; }
   .legal-body { padding: 1.1rem 1.1rem 1.3rem; }
+  .quota-block { padding: 0.85rem 0.9rem; }
 }
 </style>
 </head>
@@ -412,6 +440,18 @@ select.form-input option { background: var(--bg-1); color: var(--ink-primary); }
     <div class="disclaimer-strip">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="M12 8v5"/><circle cx="12" cy="16.3" r="0.9" fill="currentColor" stroke="none"/></svg>
       <span class="disclaimer-text"><strong>Not made by Cloudflare.</strong> warp-gen is an independent, unofficial, community-built tool. It is not affiliated with, endorsed by, or sponsored by Cloudflare, Inc., or the WireGuard project. "Cloudflare," "WARP," and "WireGuard" are trademarks of their respective owners, used here only to describe compatibility. See the <a href="#legal-terms" style="color:var(--accent-warn);text-decoration:underline;">Terms &amp; Disclaimer</a> and <a href="#legal-privacy" style="color:var(--accent-warn);text-decoration:underline;">Privacy Policy</a> below.</span>
+    </div>
+
+    <div class="quota-block">
+      <div class="quota-head">
+        <span class="quota-title">Shared CORS proxy usage — this month</span>
+        <span class="quota-count"><strong id="quotaUsed">0</strong> / 10,000</span>
+      </div>
+      <div class="quota-track"><div class="quota-fill" id="quotaFill"></div></div>
+      <div class="quota-foot">
+        <span class="quota-note">This is a free, shared CORS proxy limited to 10,000 requests/month across all users. Every config you generate uses 1. Please don't hit "Generate" repeatedly or unnecessarily — once the pool runs dry, the tool stops working for everyone until it resets.</span>
+        <span class="quota-reset" id="quotaReset">resets in –</span>
+      </div>
     </div>
   </section>
 
@@ -456,7 +496,7 @@ select.form-input option { background: var(--bg-1); color: var(--ink-primary); }
                 <label class="form-label" for="f-mtu">MTU</label>
                 <input class="form-input" id="f-mtu" name="mtu" type="number" value="1280" inputmode="numeric" autocomplete="off">
               </div>
-              <div class="form-field">
+              <div class="form-field span-2">
                 <label class="form-label" for="f-aip">Allowed IPs</label>
                 <select class="form-input" id="f-aip">
                   <option value="0.0.0.0/0" selected>Default — route everything (0.0.0.0/0)</option>
@@ -464,7 +504,7 @@ select.form-input option { background: var(--bg-1); color: var(--ink-primary); }
                   <option value="custom">Custom…</option>
                 </select>
               </div>
-              <div class="form-field hidden" id="f-aip-custom-wrap">
+              <div class="form-field hidden span-2" id="f-aip-custom-wrap">
                 <label class="form-label" for="f-aip-custom">Custom allowed IPs</label>
                 <input class="form-input" id="f-aip-custom" name="allowedIpsCustom" type="text" placeholder="e.g. 0.0.0.0/0, ::/0" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" data-lpignore="true">
               </div>
@@ -647,6 +687,8 @@ select.form-input option { background: var(--bg-1); color: var(--ink-primary); }
 <script>
   const CORS_PROXY = 'https://proxy.cors.sh/';
   const WARP_API = 'https://api.cloudflareclient.com/v0a737/reg';
+  const QUOTA_LIMIT = 10000;
+  const QUOTA_KEY = 'warpgen_quota_v1';
 
   const generateBtn = document.getElementById('generateBtn');
   const generateBtnText = document.getElementById('generateBtnText');
@@ -664,6 +706,9 @@ select.form-input option { background: var(--bg-1); color: var(--ink-primary); }
   const aipSelect = document.getElementById('f-aip');
   const aipCustomWrap = document.getElementById('f-aip-custom-wrap');
   const aipCustomInput = document.getElementById('f-aip-custom');
+  const quotaUsedEl = document.getElementById('quotaUsed');
+  const quotaFillEl = document.getElementById('quotaFill');
+  const quotaResetEl = document.getElementById('quotaReset');
 
   dnsSelect.addEventListener('change', () => {
     const isCustom = dnsSelect.value === 'custom';
@@ -684,6 +729,67 @@ select.form-input option { background: var(--bg-1); color: var(--ink-primary); }
   function hideError() {
     errorDiv.classList.add('hidden');
   }
+
+  // ---- Monthly CORS-proxy quota counter (client-side, informational) ----
+  function currentMonthKey() {
+    const d = new Date();
+    return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}`;
+  }
+
+  function loadQuota() {
+    let state;
+    try {
+      state = JSON.parse(localStorage.getItem(QUOTA_KEY));
+    } catch (e) {
+      state = null;
+    }
+    const month = currentMonthKey();
+    if (!state || state.month !== month) {
+      state = { month, count: 0 };
+      try { localStorage.setItem(QUOTA_KEY, JSON.stringify(state)); } catch (e) {}
+    }
+    return state;
+  }
+
+  function saveQuota(state) {
+    try { localStorage.setItem(QUOTA_KEY, JSON.stringify(state)); } catch (e) {}
+  }
+
+  function msUntilNextMonth() {
+    const now = new Date();
+    const next = new Date(now.getFullYear(), now.getMonth() + 1, 1, 0, 0, 0, 0);
+    return next - now;
+  }
+
+  function formatCountdown(ms) {
+    const days = Math.floor(ms / 86400000);
+    const hours = Math.floor((ms % 86400000) / 3600000);
+    if (days > 0) return `resets in ${days}d ${hours}h`;
+    const mins = Math.floor((ms % 3600000) / 60000);
+    return `resets in ${hours}h ${mins}m`;
+  }
+
+  function renderQuota(state) {
+    const used = Math.min(state.count, QUOTA_LIMIT);
+    const pct = Math.min(100, (used / QUOTA_LIMIT) * 100);
+    quotaUsedEl.textContent = used.toLocaleString();
+    quotaFillEl.style.width = pct + '%';
+    quotaFillEl.classList.toggle('warn', pct >= 70 && pct < 90);
+    quotaFillEl.classList.toggle('bad', pct >= 90);
+    quotaResetEl.textContent = formatCountdown(msUntilNextMonth());
+  }
+
+  function bumpQuota() {
+    const state = loadQuota();
+    state.count += 1;
+    saveQuota(state);
+    renderQuota(state);
+    return state.count;
+  }
+
+  renderQuota(loadQuota());
+  setInterval(() => renderQuota(loadQuota()), 60000);
+  // -------------------------------------------------------------------
 
   function getOptions() {
     const formData = new FormData(optionsForm);
@@ -824,6 +930,7 @@ Endpoint = ${peer.endpoint.host}`;
       currentConfig = config;
       configOutput.textContent = config;
       outputSection.classList.remove('hidden');
+      bumpQuota();
     } catch (err) {
       showError(err.message);
       outputSection.classList.add('hidden');

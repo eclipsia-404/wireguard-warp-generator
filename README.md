@@ -1,4 +1,4 @@
-# warp-gen
+# WARP WireGuard Config Generator
 
 A static, client-side WireGuard config generator for Cloudflare WARP. No account, no backend, no install — everything runs in your browser.
 

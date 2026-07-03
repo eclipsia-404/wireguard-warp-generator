@@ -134,6 +134,18 @@ h1.hero-title {
 }
 .meta-badge svg { width: 12px; height: 12px; color: var(--accent-ok); }
 
+/* ===== disclaimer strip ===== */
+.disclaimer-strip {
+  display: flex; align-items: flex-start; gap: 0.65rem;
+  margin-top: 1.1rem; padding: 0.75rem 1rem; border: 1px solid rgba(201,164,100,0.28);
+  background: rgba(201,164,100,0.07); border-radius: var(--radius-s);
+  font-size: 0.78rem; color: var(--ink-muted); line-height: 1.6;
+  animation: fadeUp 600ms var(--ease) 260ms both;
+}
+.disclaimer-strip strong { color: var(--accent-warn); font-weight: 600; }
+.disclaimer-strip svg { width: 15px; height: 15px; flex-shrink: 0; color: var(--accent-warn); margin-top: 3px; }
+.disclaimer-strip .disclaimer-text { flex: 1; min-width: 0; }
+
 /* ===== "How it works" steps ===== */
 .how-section { padding: 0.5rem 0 2.5rem; }
 .step-label {
@@ -305,11 +317,52 @@ select.form-input option { background: var(--bg-1); color: var(--ink-primary); }
 .privacy-note-block li::before { content: ""; position: absolute; left: 0; top: 0.55em; width: 5px; height: 5px; border-radius: 50%; background: var(--accent-ok); }
 .privacy-note-block strong { color: var(--ink-secondary); font-weight: 600; }
 
+/* ===== LEGAL SECTIONS (privacy policy / terms) ===== */
+.legal-section {
+  border: 1px solid var(--line); border-radius: var(--radius-m); background: var(--bg-1);
+  margin: 1.25rem 0; overflow: hidden; scroll-margin-top: 80px;
+}
+.legal-section summary {
+  list-style: none; cursor: pointer; padding: 1.1rem 1.5rem; display: flex; align-items: center;
+  justify-content: space-between; gap: 0.75rem;
+}
+.legal-section summary::-webkit-details-marker { display: none; }
+.legal-section summary:hover { background: var(--bg-2); }
+.legal-section summary h3 {
+  font-family: var(--font-mono); font-size: 0.8rem; font-weight: 600; color: var(--ink-primary);
+  text-transform: uppercase; letter-spacing: 0.04em; display: flex; align-items: center; gap: 0.6rem;
+}
+.legal-section summary h3 svg { width: 15px; height: 15px; color: var(--ink-subtle); flex-shrink: 0; }
+.legal-section summary .chev { transition: transform 200ms var(--ease); flex-shrink: 0; color: var(--ink-subtle); }
+.legal-section[open] summary .chev { transform: rotate(180deg); }
+.legal-section[open] summary { border-bottom: 1px solid var(--line); }
+.legal-body { padding: 1.4rem 1.5rem 1.6rem; }
+.legal-body p { font-size: 0.82rem; color: var(--ink-muted); line-height: 1.75; margin-bottom: 0.9rem; }
+.legal-body p:last-child { margin-bottom: 0; }
+.legal-body h4 {
+  font-family: var(--font-mono); font-size: 0.7rem; font-weight: 600; color: var(--ink-secondary);
+  text-transform: uppercase; letter-spacing: 0.05em; margin: 1.3rem 0 0.6rem;
+}
+.legal-body h4:first-child { margin-top: 0; }
+.legal-body ul { list-style: none; display: flex; flex-direction: column; gap: 0.55rem; margin-bottom: 0.9rem; }
+.legal-body li { font-size: 0.82rem; color: var(--ink-muted); line-height: 1.7; padding-left: 1.1rem; position: relative; }
+.legal-body li::before { content: ""; position: absolute; left: 0; top: 0.6em; width: 5px; height: 5px; border-radius: 50%; background: var(--ink-subtle); }
+.legal-body strong { color: var(--ink-secondary); font-weight: 600; }
+.legal-body a { color: var(--accent-ok); text-decoration: underline; text-underline-offset: 2px; }
+.legal-updated { font-family: var(--font-mono); font-size: 0.68rem; color: var(--ink-subtle); margin-top: 1.2rem; padding-top: 1rem; border-top: 1px dashed var(--line); }
+.trademark-note {
+  border: 1px solid rgba(201,164,100,0.28); background: rgba(201,164,100,0.06);
+  border-radius: var(--radius-s); padding: 0.9rem 1rem; margin-bottom: 1rem;
+}
+.trademark-note p { color: var(--ink-secondary) !important; margin-bottom: 0 !important; }
+
 /* ===== FOOTER ===== */
 .site-footer { border-top: 1px solid var(--line); padding: 1.5rem 0; margin-top: 1rem; }
 .footer-content { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 1.25rem; font-family: var(--font-mono); color: var(--ink-subtle); font-size: 0.74rem; }
 .footer-link { color: var(--ink-muted); }
 .footer-link:hover { color: var(--ink-primary); }
+.footer-links-row { display: flex; flex-wrap: wrap; gap: 0.5rem 1.1rem; }
+.footer-legal-note { font-size: 0.7rem; color: var(--ink-subtle); line-height: 1.6; max-width: 62ch; margin-top: 0.9rem; }
 
 @media (max-width: 420px) {
   h1.hero-title { font-size: 1.7rem; }
@@ -321,6 +374,8 @@ select.form-input option { background: var(--bg-1); color: var(--ink-primary); }
   .form-input { font-size: 0.8rem; padding: 0.75rem 0.85rem; }
   select.form-input { padding-right: 2.35rem; background-position: right 0.75rem center; }
   .action-buttons .btn { min-height: 52px; }
+  .legal-section summary { padding: 0.95rem 1.1rem; }
+  .legal-body { padding: 1.1rem 1.1rem 1.3rem; }
 }
 </style>
 </head>
@@ -354,6 +409,10 @@ select.form-input option { background: var(--bg-1); color: var(--ink-primary); }
     <div class="eyebrow">keys generated and stored locally, in-browser</div>
     <h1 class="hero-title">A WireGuard config for Cloudflare WARP, generated on the spot.</h1>
     <p class="hero-description">Private key generated locally, never sent anywhere. Free, no account needed.</p>
+    <div class="disclaimer-strip">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="M12 8v5"/><circle cx="12" cy="16.3" r="0.9" fill="currentColor" stroke="none"/></svg>
+      <span class="disclaimer-text"><strong>Not made by Cloudflare.</strong> warp-gen is an independent, unofficial, community-built tool. It is not affiliated with, endorsed by, or sponsored by Cloudflare, Inc., or the WireGuard project. "Cloudflare," "WARP," and "WireGuard" are trademarks of their respective owners, used here only to describe compatibility. See the <a href="#legal-terms" style="color:var(--accent-warn);text-decoration:underline;">Terms &amp; Disclaimer</a> and <a href="#legal-privacy" style="color:var(--accent-warn);text-decoration:underline;">Privacy Policy</a> below.</span>
+    </div>
   </section>
 
   <section class="install-container">
@@ -484,12 +543,103 @@ select.form-input option { background: var(--bg-1); color: var(--ink-primary); }
     </ul>
   </div>
 
+  <!-- ===== PRIVACY POLICY ===== -->
+  <details class="legal-section" id="legal-privacy">
+    <summary>
+      <h3><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 2l8 3.5v6c0 5-3.4 8.2-8 10.5-4.6-2.3-8-5.5-8-10.5v-6L12 2z"/></svg>Privacy Policy</h3>
+      <svg class="chev" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+    </summary>
+    <div class="legal-body">
+      <p>This Privacy Policy explains what happens to data when you use warp-gen (the "Tool"), a static, client-side web page for generating a WireGuard configuration compatible with Cloudflare WARP. warp-gen is an independent project and is not operated by, or affiliated with, Cloudflare, Inc.</p>
+
+      <h4>Data generated on this page</h4>
+      <ul>
+        <li><strong>WireGuard keypair.</strong> Your private and public keys are generated entirely in your browser using client-side JavaScript. Your private key is never transmitted anywhere and is never written to this operator's servers, because this Tool has no backend server that receives it.</li>
+        <li><strong>No local persistence.</strong> The Tool does not use cookies, localStorage, sessionStorage, or IndexedDB to store your keys or configuration. Everything lives only in page memory and is lost on reload, navigation, or tab close.</li>
+      </ul>
+
+      <h4>Data sent to third parties</h4>
+      <ul>
+        <li>To register a device, your <strong>public key</strong>, device type, and locale are sent to Cloudflare's WARP device-registration endpoint. This is an unofficial, undocumented API that Cloudflare operates for its WARP client apps; we do not control it, and Cloudflare's own privacy practices apply to any data it receives.</li>
+        <li>Because that endpoint blocks direct browser requests, the request is relayed through a third-party CORS proxy service. That proxy operator can see the request (including your public key and IP address) in transit, even though it is not the intended data controller. If you would rather avoid any third-party proxy, use the <a href="https://github.com/lanrat/wireguard-warp-generator/tree/main/scripts" target="_blank" rel="noopener noreferrer">command-line script</a> instead, which talks to Cloudflare directly from your own machine.</li>
+        <li>Your <strong>private key is never included</strong> in any request sent by this Tool.</li>
+      </ul>
+
+      <h4>Analytics, tracking, and cookies</h4>
+      <ul>
+        <li>This page sets no cookies and includes no analytics, advertising, or tracking scripts of its own.</li>
+        <li>Fonts are loaded from a third-party font host and the QR code library from a third-party CDN; those requests may be logged by those hosts under their own respective policies, independent of this Tool.</li>
+      </ul>
+
+      <h4>Your responsibility</h4>
+      <ul>
+        <li>The generated configuration file and QR code contain your private key. Treat them like a password: download, copy, or screenshot them only to places you trust, and use "Clear from screen" plus your own clipboard/downloads cleanup on shared or public devices.</li>
+        <li>Your use of Cloudflare's WARP service, once registered, is governed by Cloudflare's own <a href="https://www.cloudflare.com/privacypolicy/" target="_blank" rel="noopener noreferrer">Privacy Policy</a> and <a href="https://www.cloudflare.com/application/terms/" target="_blank" rel="noopener noreferrer">Terms of Service</a>, not by this page.</li>
+      </ul>
+
+      <h4>Changes</h4>
+      <p>Because this is a static page with no account system, there is no mechanism to notify individual users of changes. Check this section for the current version whenever you use the Tool.</p>
+
+      <div class="legal-updated">Last updated: this notice reflects the current version of the page you are viewing.</div>
+    </div>
+  </details>
+
+  <!-- ===== TERMS & DISCLAIMER ===== -->
+  <details class="legal-section" id="legal-terms">
+    <summary>
+      <h3><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z"/></svg>Terms of Use &amp; Disclaimer</h3>
+      <svg class="chev" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+    </summary>
+    <div class="legal-body">
+      <div class="trademark-note">
+        <p><strong>Not affiliated with Cloudflare.</strong> warp-gen is an independent, unofficial, open-source community tool. It is not made by, endorsed by, sponsored by, or in any way officially connected to Cloudflare, Inc., WireGuard, or Jason A. Donenfeld. "Cloudflare," "WARP," and "WireGuard" are trademarks of their respective owners and are used here solely to describe interoperability.</p>
+      </div>
+
+      <h4>No warranty</h4>
+      <p>The Tool, its source code, and any configuration it generates are provided <strong>"as is" and "as available,"</strong> without warranty of any kind, express or implied, including but not limited to warranties of merchantability, fitness for a particular purpose, title, non-infringement, accuracy, or that the Tool will be uninterrupted, secure, or error-free.</p>
+
+      <h4>Unofficial API dependency</h4>
+      <ul>
+        <li>The Tool relies on an unofficial, undocumented Cloudflare API and a third-party CORS proxy, neither of which we control or guarantee. Either can change, rate-limit, block, or shut down access without notice, at any time, which may break the Tool or cause registration failures.</li>
+        <li>We make no representation that using the Tool will always successfully register a WARP device or that any given account tier, quota, or feature will remain available.</li>
+      </ul>
+
+      <h4>Your responsibilities</h4>
+      <ul>
+        <li>You are solely responsible for complying with Cloudflare's Terms of Service and Acceptable Use Policy when you register a device through this Tool.</li>
+        <li>You are solely responsible for safeguarding the private key and configuration file generated by the Tool. Loss, theft, or exposure of that key is your responsibility, not ours.</li>
+        <li>You are responsible for verifying that use of a VPN/WARP tunnel is lawful in your jurisdiction and appropriate for your use case.</li>
+      </ul>
+
+      <h4>Limitation of liability</h4>
+      <p>To the maximum extent permitted by applicable law, in no event will the creators, contributors, or operators of warp-gen be liable for any direct, indirect, incidental, special, consequential, or exemplary damages — including loss of data, loss of privacy, network downtime, or unauthorized access — arising out of or in connection with your use of, or inability to use, the Tool or any configuration it produces, even if advised of the possibility of such damages.</p>
+
+      <h4>Indemnification</h4>
+      <p>You agree to hold harmless the creators and contributors of this Tool from any claims, losses, or damages arising from your use of the Tool or your violation of any third party's terms of service, including Cloudflare's.</p>
+
+      <h4>Open source</h4>
+      <p>The full source is publicly available for review on <a href="https://github.com/lanrat/wireguard-warp-generator" target="_blank" rel="noopener noreferrer">GitHub</a>, including the standalone command-line script, so you can audit exactly what the Tool does before trusting it with key generation.</p>
+
+      <h4>Not legal advice</h4>
+      <p>This page is general informational boilerplate provided for transparency and is not legal advice. If you need Terms of Service or a Privacy Policy tailored to your specific deployment, audience, or jurisdiction, consult a qualified attorney.</p>
+
+      <div class="legal-updated">Last updated: this notice reflects the current version of the page you are viewing.</div>
+    </div>
+  </details>
+
 </main>
 
 <footer class="site-footer">
-  <div class="wrap footer-content">
-    <span>WireGuard® is a registered trademark of Jason A. Donenfeld.</span>
-    <a class="footer-link" href="https://github.com/lanrat/wireguard-warp-generator" target="_blank" rel="noopener noreferrer">View source on GitHub</a>
+  <div class="wrap">
+    <div class="footer-content">
+      <span>WireGuard® is a registered trademark of Jason A. Donenfeld.</span>
+      <div class="footer-links-row">
+        <a class="footer-link" href="#legal-privacy">Privacy Policy</a>
+        <a class="footer-link" href="#legal-terms">Terms &amp; Disclaimer</a>
+        <a class="footer-link" href="https://github.com/lanrat/wireguard-warp-generator" target="_blank" rel="noopener noreferrer">View source on GitHub</a>
+      </div>
+    </div>
+    <p class="footer-legal-note">warp-gen is an independent, unofficial tool and is not affiliated with, endorsed by, or sponsored by Cloudflare, Inc. Provided "as is," with no warranty of any kind, for informational and personal-use purposes only.</p>
   </div>
 </footer>
 

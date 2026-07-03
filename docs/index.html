@@ -10,8 +10,13 @@
 <meta name="robots" content="noindex, nofollow">
 <meta http-equiv="Cache-Control" content="no-store, no-cache, must-revalidate">
 <meta http-equiv="Pragma" content="no-cache">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline' https://fonts.bunny.net; font-src https://fonts.bunny.net; connect-src https://proxy.cors.sh; img-src 'self' data:; object-src 'none'; base-uri 'none'; form-action 'none';">
-<script src="https://cdn.jsdelivr.net/npm/qrcode/build/qrcode.min.js"></script>
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline' https://fonts.bunny.net; font-src https://fonts.bunny.net; connect-src https://proxy.cors.sh; img-src 'self' data:; object-src 'none'; base-uri 'none'; form-action 'none'; frame-ancestors 'none';">
+<script>
+  if (window.top !== window.self) {
+    window.top.location = window.self.location;
+  }
+</script>
+<script src="https://cdn.jsdelivr.net/npm/qrcode@1.5.4/build/qrcode.min.js"></script>
 <link rel="preconnect" href="https://fonts.bunny.net">
 <link href="https://fonts.bunny.net/css2?family=Source+Serif+4:wght@400;600&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
@@ -76,7 +81,6 @@ button { font-family: inherit; cursor: pointer; background: none; border: none; 
 .wrap { max-width: 760px; margin: 0 auto; padding: 0 1.5rem; }
 @media (max-width: 420px) { .wrap { padding: 0 1.15rem; } }
 
-/* ===== HEADER ===== */
 .site-header {
   position: sticky; top: 0; z-index: 100;
   background: var(--bg-glass);
@@ -84,7 +88,7 @@ button { font-family: inherit; cursor: pointer; background: none; border: none; 
   -webkit-backdrop-filter: blur(20px) saturate(180%);
   border-bottom: 1px solid var(--line);
 }
-.header-inner { display: flex; align-items: center; justify-content: space-between; padding: 1.1rem 0; gap: 1.5rem; min-height: 60px; }
+.header-inner { display: flex; align-items: center; justify-content: space-between; padding: 1.1rem 0; gap: 1.5rem; min-height: 60px; flex-wrap: nowrap; }
 .brand { display: flex; align-items: center; gap: 0.75rem; }
 .brand-icon {
   width: 34px; height: 34px; border-radius: var(--radius-s);
@@ -103,10 +107,27 @@ button { font-family: inherit; cursor: pointer; background: none; border: none; 
 }
 .nav-action:hover { color: var(--ink-primary); border-color: var(--line-hover); background: var(--bg-2); }
 .nav-action svg { width: 13px; height: 13px; }
-@media (max-width: 560px) { .nav-action .full { display: none; } }
+@media (max-width: 760px) {
+  .site-header .wrap { padding-left: 1.35rem; padding-right: 1.35rem; }
+}
+@media (max-width: 560px) {
+  .nav-action .full { display: none; }
+  .header-inner { gap: 0.6rem; }
+  .header-nav-links { gap: 0.4rem; }
+  .nav-action { padding: 8px 11px; min-width: 40px; }
+  .brand { gap: 0.5rem; min-width: 0; }
+  .brand-name { font-size: 0.88rem; }
+  .brand-tag { display: none; }
+}
+@media (max-width: 360px) {
+  .header-inner { padding: 0.9rem 0; }
+  .brand-icon { width: 30px; height: 30px; }
+  .nav-action { padding: 7px 9px; min-width: 36px; }
+  .header-nav-links { gap: 0.3rem; }
+  .site-header .wrap { padding-left: 1.15rem; padding-right: 1.15rem; }
+}
 
 
-/* ===== HERO ===== */
 .hero { padding: 2.75rem 0 0.5rem; }
 @keyframes fadeUp { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: translateY(0); } }
 @keyframes pulse { 0%,100% { opacity: 1; } 50% { opacity: 0.5; } }
@@ -135,7 +156,6 @@ h1.hero-title {
 }
 .meta-badge svg { width: 12px; height: 12px; color: var(--accent-ok); }
 
-/* ===== disclaimer strip ===== */
 .disclaimer-strip {
   display: flex; align-items: flex-start; gap: 0.65rem;
   margin-top: 1.1rem; padding: 0.75rem 1rem; border: 1px solid rgba(201,164,100,0.28);
@@ -147,7 +167,6 @@ h1.hero-title {
 .disclaimer-strip svg { width: 15px; height: 15px; flex-shrink: 0; color: var(--accent-warn); margin-top: 3px; }
 .disclaimer-strip .disclaimer-text { flex: 1; min-width: 0; }
 
-/* ===== proxy quota bar ===== */
 .quota-block {
   margin-top: 1.1rem; padding: 0.95rem 1.1rem; border: 1px solid var(--line);
   background: var(--bg-1); border-radius: var(--radius-s);
@@ -165,7 +184,6 @@ h1.hero-title {
 .quota-note { font-size: 0.74rem; color: var(--ink-subtle); line-height: 1.55; }
 .quota-reset { font-family: var(--font-mono); font-size: 0.68rem; color: var(--ink-subtle); white-space: nowrap; }
 
-/* ===== "How it works" steps ===== */
 .how-section { padding: 0.5rem 0 2.5rem; }
 .step-label {
   font-family: var(--font-mono); font-size: 0.7rem; color: var(--ink-subtle);
@@ -187,7 +205,6 @@ h1.hero-title {
   background: var(--bg-2); padding: 2px 7px; border-radius: 4px; border: 1px solid var(--line);
 }
 
-/* ===== INSTALL / GENERATOR CONTAINER ===== */
 .install-container {
   margin: 1.5rem 0 2rem; border: 1px solid var(--line-strong); border-radius: var(--radius-m);
   background: linear-gradient(180deg, var(--bg-1) 0%, var(--bg-0) 100%);
@@ -217,7 +234,6 @@ h1.hero-title {
 .spin { animation: spin 0.8s linear infinite; }
 @keyframes spin { to { transform: rotate(360deg); } }
 
-/* Advanced options (manual-toggle pattern) */
 .manual-toggle { border: 1px solid var(--line); border-radius: var(--radius-s); background: var(--bg-0); margin-top: 1.1rem; overflow: hidden; }
 .manual-toggle summary {
   list-style: none; cursor: pointer; padding: 1rem 1.25rem; display: flex; align-items: center;
@@ -255,7 +271,6 @@ select.form-input {
 }
 select.form-input option { background: var(--bg-1); color: var(--ink-primary); }
 
-/* Warning / error banner */
 .warning-banner {
   display: flex; gap: 0.75rem; padding: 0.85rem 1rem; background: rgba(196,122,106,0.08);
   border: 1px solid rgba(196,122,106,0.25); border-radius: var(--radius-s); margin: 0 0 1.25rem;
@@ -271,7 +286,6 @@ select.form-input option { background: var(--bg-1); color: var(--ink-primary); }
 .warning-banner .banner-body { flex: 1; min-width: 0; }
 .hidden { display: none !important; }
 
-/* ===== OUTPUT ===== */
 .output-section { margin-top: 0.5rem; }
 .account-user-row {
   display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 0.75rem;
@@ -328,7 +342,6 @@ select.form-input option { background: var(--bg-1); color: var(--ink-primary); }
 .btn-danger:hover { color: var(--accent-bad); border-color: var(--accent-bad); background: rgba(196,122,106,0.08); }
 .clip-note { font-size: 0.74rem; color: var(--ink-subtle); line-height: 1.6; margin-top: 0.9rem; }
 
-/* ===== PRIVACY NOTE ===== */
 .privacy-note-block { border: 1px solid var(--line); border-radius: var(--radius-m); padding: 1.5rem 1.75rem; background: var(--bg-1); margin: 2rem 0; }
 .privacy-note-block h3 { font-family: var(--font-mono); font-size: 0.78rem; font-weight: 600; color: var(--ink-primary); margin-bottom: 0.9rem; text-transform: uppercase; letter-spacing: 0.04em; }
 .privacy-note-block ul { list-style: none; display: flex; flex-direction: column; gap: 0.6rem; }
@@ -336,7 +349,6 @@ select.form-input option { background: var(--bg-1); color: var(--ink-primary); }
 .privacy-note-block li::before { content: ""; position: absolute; left: 0; top: 0.55em; width: 5px; height: 5px; border-radius: 50%; background: var(--accent-ok); }
 .privacy-note-block strong { color: var(--ink-secondary); font-weight: 600; }
 
-/* ===== LEGAL SECTIONS (privacy policy / terms) ===== */
 .legal-section {
   border: 1px solid var(--line); border-radius: var(--radius-m); background: var(--bg-1);
   margin: 1.25rem 0; overflow: hidden; scroll-margin-top: 80px;
@@ -375,7 +387,6 @@ select.form-input option { background: var(--bg-1); color: var(--ink-primary); }
 }
 .trademark-note p { color: var(--ink-secondary) !important; margin-bottom: 0 !important; }
 
-/* ===== FOOTER ===== */
 .site-footer { border-top: 1px solid var(--line); padding: 1.5rem 0; margin-top: 1rem; }
 .footer-content { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 1.25rem; font-family: var(--font-mono); color: var(--ink-subtle); font-size: 0.74rem; }
 .footer-link { color: var(--ink-muted); }
@@ -383,7 +394,6 @@ select.form-input option { background: var(--bg-1); color: var(--ink-primary); }
 .footer-links-row { display: flex; flex-wrap: wrap; gap: 0.5rem 1.1rem; }
 .footer-legal-note { font-size: 0.7rem; color: var(--ink-subtle); line-height: 1.6; max-width: 62ch; margin-top: 0.9rem; }
 
-/* ===== DESKTOP WIDTH ===== */
 @media (min-width: 900px) {
   .wrap { max-width: 840px; }
   .install-body { padding: 2.1rem 2.25rem 2.3rem; }
@@ -578,12 +588,11 @@ select.form-input option { background: var(--bg-1); color: var(--ink-primary); }
     <ul>
       <li><strong>Your private key</strong> never does — it's generated and stays in this page.</li>
       <li>Only your <strong>public key</strong> and device type are sent to Cloudflare's WARP registration API, via a CORS proxy since that API doesn't allow direct browser requests.</li>
-      <li>No accounts, cookies, or analytics — reload the page and everything above is gone.</li>
+      <li>No accounts, cookies, or analytics. The only thing that persists between visits is a non-identifying monthly usage counter for the shared proxy quota — reload the page and your key, config, and QR code are gone.</li>
       <li>Prefer not to trust a browser tab? Use the <a href="https://github.com/lanrat/wireguard-warp-generator/tree/main/scripts" target="_blank" rel="noopener noreferrer">command-line script</a> instead — same registration flow, runs entirely local.</li>
     </ul>
   </div>
 
-  <!-- ===== PRIVACY POLICY ===== -->
   <details class="legal-section" id="legal-privacy">
     <summary>
       <h3><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 2l8 3.5v6c0 5-3.4 8.2-8 10.5-4.6-2.3-8-5.5-8-10.5v-6L12 2z"/></svg>Privacy Policy</h3>
@@ -595,7 +604,8 @@ select.form-input option { background: var(--bg-1); color: var(--ink-primary); }
       <h4>Data generated on this page</h4>
       <ul>
         <li><strong>WireGuard keypair.</strong> Your private and public keys are generated entirely in your browser using client-side JavaScript. Your private key is never transmitted anywhere and is never written to this operator's servers, because this Tool has no backend server that receives it.</li>
-        <li><strong>No local persistence.</strong> The Tool does not use cookies, localStorage, sessionStorage, or IndexedDB to store your keys or configuration. Everything lives only in page memory and is lost on reload, navigation, or tab close.</li>
+        <li><strong>No local persistence of keys or configs.</strong> The Tool does not use cookies, sessionStorage, or IndexedDB to store your keys or configuration, and nothing you generate is written to localStorage either. The <em>only</em> thing this page stores in localStorage is a non-identifying monthly counter (a plain number) tracking how many configs have been generated against the shared CORS-proxy quota — it contains no keys, no config data, and nothing tied to you personally. Everything else lives only in page memory and is lost on reload, navigation, or tab close.</li>
+        <li><strong>Visible in the DOM while on screen.</strong> While a config is displayed, its text (including your private key) briefly exists in the page's DOM and in a canvas element for the QR code, like any on-screen web content. Browser extensions with broad page-content permissions (some clipboard managers, some password managers, accessibility/screen-reader tools, etc.) can technically read visible page content, independent of anything this Tool sends over the network. If you don't fully trust your browser's installed extensions, consider a clean/incognito profile with no extensions enabled, or the command-line script instead.</li>
       </ul>
 
       <h4>Data sent to third parties</h4>
@@ -624,7 +634,6 @@ select.form-input option { background: var(--bg-1); color: var(--ink-primary); }
     </div>
   </details>
 
-  <!-- ===== TERMS & DISCLAIMER ===== -->
   <details class="legal-section" id="legal-terms">
     <summary>
       <h3><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z"/></svg>Terms of Use &amp; Disclaimer</h3>
@@ -730,7 +739,6 @@ select.form-input option { background: var(--bg-1); color: var(--ink-primary); }
     errorDiv.classList.add('hidden');
   }
 
-  // ---- Monthly CORS-proxy quota counter (client-side, informational) ----
   function currentMonthKey() {
     const d = new Date();
     return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}`;
@@ -789,7 +797,6 @@ select.form-input option { background: var(--bg-1); color: var(--ink-primary); }
 
   renderQuota(loadQuota());
   setInterval(() => renderQuota(loadQuota()), 60000);
-  // -------------------------------------------------------------------
 
   function getOptions() {
     const formData = new FormData(optionsForm);
@@ -883,9 +890,6 @@ Endpoint = ${peer.endpoint.host}`;
     return config;
   }
 
-  // Single source of truth for the sensitive config text. Never written to
-  // localStorage/sessionStorage/cookies/IndexedDB — kept only in memory and
-  // in the on-screen DOM node, both of which wipeSensitiveData() clears.
   let currentConfig = null;
 
   function wipeOutput() {
@@ -903,8 +907,6 @@ Endpoint = ${peer.endpoint.host}`;
 
   function wipeSensitiveData() {
     wipeOutput();
-    // Custom DNS / Allowed IPs entries can reveal a private DNS resolver or
-    // internal LAN subnet — treat them as sensitive too and reset on wipe.
     dnsCustomInput.value = '';
     aipCustomInput.value = '';
     dnsCustomWrap.classList.add('hidden');
@@ -967,7 +969,6 @@ Endpoint = ${peer.endpoint.host}`;
 
   document.getElementById('clearBtn').addEventListener('click', wipeSensitiveData);
 
-  // Best-effort wipe if the tab is closed, reloaded, or navigated away from.
   window.addEventListener('pagehide', wipeSensitiveData);
   window.addEventListener('beforeunload', wipeSensitiveData);
 </script>
